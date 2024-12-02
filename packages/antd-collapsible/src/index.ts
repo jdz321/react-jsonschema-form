@@ -3,6 +3,7 @@ import { FormContextType, RJSFSchema, StrictRJSFSchema } from '@rjsf/utils';
 import { FormProps, ThemeProps, withTheme } from '@rjsf/core';
 
 import Templates, { generateTemplates } from './templates';
+import Widgets, { generateWidgets } from './widgets';
 import Fields, { generateFields } from './fields';
 
 export function generateTheme<
@@ -13,6 +14,7 @@ export function generateTheme<
   return {
     fields: generateFields<T, S, F>(),
     templates: generateTemplates<T, S, F>(),
+    widgets: generateWidgets<T, S, F>(),
   };
 }
 
@@ -28,6 +30,6 @@ export function generateForm<
 
 const Form = generateForm();
 
-export { Form, Fields, Templates, Theme, generateTemplates };
+export { Form, Theme, Fields, Templates, Widgets, generateFields, generateTemplates, generateWidgets };
 
 export default Form;
