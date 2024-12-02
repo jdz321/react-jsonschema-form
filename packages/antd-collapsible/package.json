@@ -1,6 +1,6 @@
 {
   "name": "rjsf-antd-collapsible",
-  "version": "5.23.1",
+  "version": "5.23.2",
   "description": "Ant Design theme, fields and widgets for react-jsonschema-form",
   "main": "dist/index.js",
   "module": "lib/index.js",
