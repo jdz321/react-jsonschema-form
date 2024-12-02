@@ -4,6 +4,7 @@ import { Theme as FluentUITheme } from '@rjsf/fluent-ui';
 import { Theme as FluentUIRCTheme } from '@rjsf/fluentui-rc';
 import { Theme as SuiTheme } from '@rjsf/semantic-ui';
 import { Theme as AntdTheme } from '@rjsf/antd';
+import { Theme as AntdCollapsibleTheme } from 'rjsf-antd-collapsible';
 import { Theme as Bootstrap4Theme } from '@rjsf/bootstrap-4';
 import { Theme as ChakraUITheme } from '@rjsf/chakra-ui';
 import v8Validator, { customizeValidator } from '@rjsf/validator-ajv8';
@@ -96,6 +97,10 @@ const themes: PlaygroundProps['themes'] = {
   antd: {
     stylesheet: '//cdnjs.cloudflare.com/ajax/libs/antd/4.1.4/antd.min.css',
     theme: AntdTheme,
+  },
+  'antd-collapsible': {
+    stylesheet: '//cdnjs.cloudflare.com/ajax/libs/antd/4.1.4/antd.min.css',
+    theme: AntdCollapsibleTheme,
   },
   'bootstrap-4': {
     stylesheet: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css',
