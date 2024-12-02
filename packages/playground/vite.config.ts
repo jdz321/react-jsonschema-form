@@ -16,6 +16,7 @@ export default defineConfig({
     alias: {
       // mapping packages in monorepo to make vite use sources directly avoiding build step
       '@rjsf/antd': path.resolve(__dirname, '../antd/src'),
+      'rjsf-antd-collapsible': path.resolve(__dirname, '../antd-collapsible/src'),
       '@rjsf/bootstrap-4': path.resolve(__dirname, '../bootstrap-4/src'),
       '@rjsf/chakra-ui': path.resolve(__dirname, '../chakra-ui/src'),
       '@rjsf/core': path.resolve(__dirname, '../core/src'),
