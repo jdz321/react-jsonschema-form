@@ -1,4 +1,4 @@
-import {
+import type {
   ArrayFieldTemplateProps,
   FieldProps,
   FormContextType,
@@ -6,6 +6,7 @@ import {
   StrictRJSFSchema,
   ObjectFieldTemplateProps,
 } from '@rjsf/utils';
+import type { CSSProperties } from 'react';
 
 export type CustomArrayFieldTemplateProps<
   T = any,
@@ -18,3 +19,8 @@ export type CustomObjectFieldTemplateProps<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any
 > = ObjectFieldTemplateProps<T, S, F> & Pick<FieldProps<T, S, F>, 'onChange'>;
+
+export interface TextEditorProps extends Pick<CSSProperties, 'width' | 'height'> {
+  value: string;
+  onChange(val: string): void;
+}

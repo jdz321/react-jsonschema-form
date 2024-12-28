@@ -23,7 +23,7 @@ const MonacoEditor = (props: QuietEditorProp): ReactElement => {
     height,
     value,
     folding = true,
-    language,
+    language = 'json',
     readOnly = false,
     renderLineHighlight = 'all',
     onChange,

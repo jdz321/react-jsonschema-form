@@ -10,7 +10,6 @@ import {
 import classNames from 'classnames';
 import { Col, Row, Modal, ConfigProvider, Button, Collapse, type CollapseProps } from 'antd';
 import { PlusCircleOutlined, FormOutlined } from '@ant-design/icons';
-import MonacoEditor from '../MonacoEditor';
 import { ComponentType, useContext, useState } from 'react';
 
 const DESCRIPTION_COL_STYLE = {
@@ -18,6 +17,7 @@ const DESCRIPTION_COL_STYLE = {
 };
 
 import { CustomArrayFieldTemplateProps } from '../types';
+import getTextEditor from '../components/getTextEditor';
 
 /** The `ArrayFieldTemplate` component is the template used to render all items in an array.
  *
@@ -71,6 +71,7 @@ function ArrayFieldTemplate<T = any, S extends StrictRJSFSchema = RJSFSchema, F 
     labelAlign === 'left' && `${labelClsBasic}-left`
     // labelCol.className,
   );
+  const TextEditor = getTextEditor(formContext);
 
   const [showEditor, setShowEditor] = useState(false);
   const [draft, setDraft] = useState<string>();
@@ -162,8 +163,7 @@ function ArrayFieldTemplate<T = any, S extends StrictRJSFSchema = RJSFSchema, F 
   return (
     <fieldset className={className} id={idSchema.$id}>
       <Modal title='编辑JSON' open={showEditor} onOk={onEditOk} onCancel={onEditCancel} destroyOnClose width='70vw'>
-        <MonacoEditor
-          language='json'
+        <TextEditor
           width='100%'
           height='70vh'
           value={JSON.stringify(formData || [], null, 2)}

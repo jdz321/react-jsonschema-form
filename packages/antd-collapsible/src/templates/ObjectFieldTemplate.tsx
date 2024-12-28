@@ -19,7 +19,7 @@ import { Col, Row, ConfigProvider, Collapse, type CollapseProps, Modal, Button }
 import { ComponentType, useContext, useState } from 'react';
 import { errorSchemaHasError } from '../utils';
 import { CustomObjectFieldTemplateProps } from '../types';
-import MonacoEditor from '../MonacoEditor';
+import getTextEditor from '../components/getTextEditor';
 import { FormOutlined } from '@ant-design/icons';
 
 const DESCRIPTION_COL_STYLE = {
@@ -115,6 +115,7 @@ function ObjectFieldTemplate<T = any, S extends StrictRJSFSchema = RJSFSchema, F
     labelAlign === 'left' && `${labelClsBasic}-left`
     // labelCol.className,
   );
+  const TextEditor = getTextEditor(formContext);
 
   const [showEditor, setShowEditor] = useState(false);
   const [draft, setDraft] = useState<string>();
@@ -215,8 +216,7 @@ function ObjectFieldTemplate<T = any, S extends StrictRJSFSchema = RJSFSchema, F
   return (
     <fieldset id={idSchema.$id}>
       <Modal title='编辑JSON' open={showEditor} onOk={onEditOk} onCancel={onEditCancel} destroyOnClose width='70vw'>
-        <MonacoEditor
-          language='json'
+        <TextEditor
           width='100%'
           height='70vh'
           value={JSON.stringify(formData || {}, null, 2)}
