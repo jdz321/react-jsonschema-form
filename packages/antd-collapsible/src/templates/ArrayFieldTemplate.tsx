@@ -17,7 +17,7 @@ const DESCRIPTION_COL_STYLE = {
 };
 
 import { CustomArrayFieldTemplateProps } from '../types';
-import getTextEditor from '../components/getTextEditor';
+import useTextEditor from '../components/useTextEditor';
 
 /** The `ArrayFieldTemplate` component is the template used to render all items in an array.
  *
@@ -71,7 +71,7 @@ function ArrayFieldTemplate<T = any, S extends StrictRJSFSchema = RJSFSchema, F 
     labelAlign === 'left' && `${labelClsBasic}-left`
     // labelCol.className,
   );
-  const TextEditor = getTextEditor(formContext);
+  const TextEditor = useTextEditor(formContext);
 
   const [showEditor, setShowEditor] = useState(false);
   const [draft, setDraft] = useState<string>();

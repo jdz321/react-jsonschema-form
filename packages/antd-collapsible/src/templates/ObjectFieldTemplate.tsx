@@ -19,7 +19,7 @@ import { Col, Row, ConfigProvider, Collapse, type CollapseProps, Modal, Button }
 import { ComponentType, useContext, useState } from 'react';
 import { errorSchemaHasError } from '../utils';
 import { CustomObjectFieldTemplateProps } from '../types';
-import getTextEditor from '../components/getTextEditor';
+import useTextEditor from '../components/useTextEditor';
 import { FormOutlined } from '@ant-design/icons';
 
 const DESCRIPTION_COL_STYLE = {
@@ -115,7 +115,7 @@ function ObjectFieldTemplate<T = any, S extends StrictRJSFSchema = RJSFSchema, F
     labelAlign === 'left' && `${labelClsBasic}-left`
     // labelCol.className,
   );
-  const TextEditor = getTextEditor(formContext);
+  const TextEditor = useTextEditor(formContext);
 
   const [showEditor, setShowEditor] = useState(false);
   const [draft, setDraft] = useState<string>();
