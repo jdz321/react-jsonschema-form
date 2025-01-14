@@ -8,7 +8,7 @@ import {
   StrictRJSFSchema,
 } from '@rjsf/utils';
 import classNames from 'classnames';
-import { Col, Row, Modal, ConfigProvider, Button, Collapse, type CollapseProps } from 'antd';
+import { Col, Row, Modal, ConfigProvider, Button, type CollapseProps } from 'antd';
 import { PlusCircleOutlined, FormOutlined } from '@ant-design/icons';
 import { ComponentType, useContext, useState } from 'react';
 
@@ -18,6 +18,7 @@ const DESCRIPTION_COL_STYLE = {
 
 import { CustomArrayFieldTemplateProps } from '../types';
 import useTextEditor from '../components/useTextEditor';
+import CollapseHOC from '../components/CollapseHOC';
 
 /** The `ArrayFieldTemplate` component is the template used to render all items in an array.
  *
@@ -75,13 +76,12 @@ function ArrayFieldTemplate<T = any, S extends StrictRJSFSchema = RJSFSchema, F 
 
   const [showEditor, setShowEditor] = useState(false);
   const [draft, setDraft] = useState<string>();
-  const defaultActiveKey = [idSchema.$id];
-  const [activeKey, setActiveKey] = useState<string[] | string>(defaultActiveKey);
+  const [expandTime, setExpandTime] = useState<number>();
 
   const onEditOk = () => {
     onChange(JSON.parse(draft || '[]'));
     setShowEditor(false);
-    setActiveKey(defaultActiveKey);
+    setExpandTime(Date.now());
   };
   const onEditCancel = () => {
     setShowEditor(false);
@@ -109,7 +109,7 @@ function ArrayFieldTemplate<T = any, S extends StrictRJSFSchema = RJSFSchema, F 
               icon={<PlusCircleOutlined />}
               onClick={() => {
                 onAddClick();
-                setActiveKey(defaultActiveKey);
+                setExpandTime(Date.now());
               }}
               disabled={disabled || readonly}
             >
@@ -173,11 +173,13 @@ function ArrayFieldTemplate<T = any, S extends StrictRJSFSchema = RJSFSchema, F 
         />
       </Modal>
       <Row>
-        <Collapse
-          activeKey={hasShownError ? defaultActiveKey : activeKey}
+        <CollapseHOC
           collapsible='icon'
+          expandTime={expandTime}
+          formContext={formContext}
+          forceExpand={hasShownError}
+          id={idSchema.$id}
           items={collapseItems}
-          onChange={setActiveKey}
         />
       </Row>
     </fieldset>

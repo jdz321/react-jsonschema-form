@@ -15,11 +15,12 @@ import {
   getUiOptions,
   titleId,
 } from '@rjsf/utils';
-import { Col, Row, ConfigProvider, Collapse, type CollapseProps, Modal, Button } from 'antd';
+import { Col, Row, ConfigProvider, type CollapseProps, Modal, Button } from 'antd';
 import { ComponentType, useContext, useState } from 'react';
 import { errorSchemaHasError } from '../utils';
 import { CustomObjectFieldTemplateProps } from '../types';
 import useTextEditor from '../components/useTextEditor';
+import CollapseHOC from '../components/CollapseHOC';
 import { FormOutlined } from '@ant-design/icons';
 
 const DESCRIPTION_COL_STYLE = {
@@ -119,14 +120,13 @@ function ObjectFieldTemplate<T = any, S extends StrictRJSFSchema = RJSFSchema, F
 
   const [showEditor, setShowEditor] = useState(false);
   const [draft, setDraft] = useState<string>();
-  const defaultActiveKey = [idSchema.$id];
-  const [activeKey, setActiveKey] = useState<string[] | string>(defaultActiveKey);
   const hasShownError = errorSchemaHasError(errorSchema);
+  const [expandTime, setExpandTime] = useState<number>();
 
   const onEditOk = () => {
     onChange(JSON.parse(draft || '{}'));
     setShowEditor(false);
-    setActiveKey(defaultActiveKey);
+    setExpandTime(Date.now());
   };
   const onEditCancel = () => {
     setShowEditor(false);
@@ -226,11 +226,13 @@ function ObjectFieldTemplate<T = any, S extends StrictRJSFSchema = RJSFSchema, F
         />
       </Modal>
       <Row>
-        <Collapse
-          activeKey={hasShownError ? defaultActiveKey : activeKey}
+        <CollapseHOC
           collapsible='icon'
+          expandTime={expandTime}
+          formContext={formContext}
+          forceExpand={hasShownError}
+          id={idSchema.$id}
           items={collapseItems}
-          onChange={setActiveKey}
         />
       </Row>
     </fieldset>
